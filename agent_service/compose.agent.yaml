@@ -1,0 +1,16 @@
+services:
+  nemotron-marketing-agent:
+    build:
+      context: .
+      dockerfile: agent_service/Dockerfile
+    env_file:
+      - agent_service/.env
+    ports:
+      - "${AGENT_PORT:-8090}:8090"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=5)"]
+      interval: 30s
+      timeout: 8s
+      retries: 3
+      start_period: 45s

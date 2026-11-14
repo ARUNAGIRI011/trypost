@@ -126,3 +126,7 @@ Short on time? A ⭐ is the best way to help. It puts TryPost in front of more p
 ## License
 
 [GNU Affero General Public License v3.0](LICENSE.md). Use, modify, fork, self-host and redistribute, including commercially. If you run a modified version as a network service, make your changes available to its users (AGPL §13).
+
+## Nemotron marketing-agent extension
+
+This fork includes an optional CrewAI service powered by NVIDIA Nemotron for multilingual campaign planning, content drafting, quality review and approval-controlled scheduling through the existing TryPost REST API. See [agent_service/README.md](agent_service/README.md) for configuration, Supabase PostgreSQL setup and API usage. The extension is separate from the core TryPost app and does not auto-publish generated drafts without an explicit approval request.

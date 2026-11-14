@@ -18,7 +18,7 @@ A separate CrewAI service adding campaign planning, Tamil/English copy generatio
 4. Set AGENT_API_KEY to a long random secret, NVIDIA_API_KEY, DATABASE_URL, TRYPOST_API_BASE_URL (include /api) and TRYPOST_API_KEY (TryPost Settings -> API Keys).
 5. Start from repository root: docker compose -f compose.yaml -f agent_service/compose.agent.yaml up -d --build nemotron-marketing-agent.
 
-The root Compose file still starts its local PostgreSQL service for default TryPost development. For Supabase deployment, configure the app container DB environment and use a Compose override that removes the pgsql service and its depends_on entry. Do not leave DB_HOST=pgsql hardcoded in Compose; Compose environment values override .env.
+The root Compose file still starts its local PostgreSQL service for default TryPost development. For Supabase deployment, edit compose.yaml before starting: remove the pgsql service block, remove app.depends_on.pgsql, and remove the app.environment DB_HOST: pgsql and DB_USERNAME: postgres overrides. Set DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME and DB_PASSWORD in the root .env from the Supabase Connect dialog. Do not leave DB_HOST=pgsql hardcoded in Compose; Compose environment values override .env. Keep the Redis service and app dependency.
 
 ## API
 

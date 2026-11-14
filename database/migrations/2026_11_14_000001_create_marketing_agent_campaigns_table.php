@@ -27,16 +27,16 @@ return new class extends Migration
 
         DB::statement('ALTER TABLE marketing_agent_campaigns ENABLE ROW LEVEL SECURITY');
         DB::statement(<<<'SQL'
-            DO $$
+            DO $
             BEGIN
                 IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
-                    REVOKE ALL ON TABLE marketing_agent_campaigns FROM anon;
+                    EXECUTE 'REVOKE ALL ON TABLE marketing_agent_campaigns FROM anon';
                 END IF;
                 IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
-                    REVOKE ALL ON TABLE marketing_agent_campaigns FROM authenticated;
+                    EXECUTE 'REVOKE ALL ON TABLE marketing_agent_campaigns FROM authenticated';
                 END IF;
             END
-            $$;
+            $;
         SQL);
     }
 
